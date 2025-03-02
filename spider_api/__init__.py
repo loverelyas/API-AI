@@ -1,11 +1,12 @@
 import requests
 import os
-
+from dotenv import load_dotenv
 try:
     import telebot
 except ImportError:
     raise ImportError("لم يتم العثور على مكتبة pyTelegramBotAPI. يرجى تثبيتها باستخدام: pip install pyTelegramBotAPI")
 
+load_dotenv()
 
 
 # قراءة المتغيرات من GitHub Secrets
@@ -14,8 +15,10 @@ ADMINID = os.getenv('ADMINID')  # معرف الدردشة الخاص بالإد�
 APIURL = os.getenv('APIURL')  # رابط API
 
 # التحقق من أن المتغيرات موجودة
+
 if not BOTTOKEN or not ADMINID or not APIURL:
-    raise ValueError("يجب تعيين المتغيرات في GitHub Secrets.")
+    raise ValueError("يجب تعيين المتغيرات في ملف .env أو GitHub Secrets.")
+
 
 # إنشاء كائن البوت
 admin_bot = telebot.TeleBot(BOTTOKEN)
