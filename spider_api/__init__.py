@@ -1,8 +1,5 @@
 import requests
 import os
-from dotenv import load_dotenv
-
-
 
 
 try:
@@ -10,11 +7,13 @@ try:
 except ImportError:
     raise ImportError("لم يتم العثور على مكتبة pyTelegramBotAPI. يرجى تثبيتها باستخدام: pip install pyTelegramBotAPI")
 
-load_dotenv()
+
 # قراءة المتغيرات الحساسة من متغيرات البيئة
-BOTTOKEN = os.getenv('BOTTOKEN')
-ADMINID = os.getenv('ADMINID')
-APIURL = os.getenv('APIURL')
+
+BOTTOKEN = '7207961885:AAGRf5GZTCOGL5QSBe56xTs7C1d8kpM-R5s'
+ADMINID = '1090494697'
+APIURL = 'https://api-production-8dd7.up.railway.app/api'
+
 
 # إنشاء كائن البوت
 admin_bot = telebot.TeleBot(BOTTOKEN)
