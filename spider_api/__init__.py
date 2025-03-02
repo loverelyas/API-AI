@@ -12,9 +12,9 @@ except ImportError:
 
 load_dotenv()
 # قراءة المتغيرات الحساسة من متغيرات البيئة
-TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-ADMIN_CHAT_ID = os.getenv('ADMIN_CHAT_ID')
-API_URL = os.getenv('API_URL')
+BOTTOKEN = os.getenv('BOTTOKEN')
+ADMINID = os.getenv('ADMINID')
+APIURL = os.getenv('APIURL')
 
 # إنشاء كائن البوت
 admin_bot = telebot.TeleBot(TELEGRAM_BOT_TOKEN)
