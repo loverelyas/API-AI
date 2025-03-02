@@ -1,27 +1,23 @@
 import requests
 import os
 from dotenv import load_dotenv
+
+
+
+
 try:
     import telebot
 except ImportError:
     raise ImportError("لم يتم العثور على مكتبة pyTelegramBotAPI. يرجى تثبيتها باستخدام: pip install pyTelegramBotAPI")
 
 load_dotenv()
-
-
-# قراءة المتغيرات من GitHub Secrets
-BOTTOKEN = os.getenv('BOTTOKEN')  # التوكن الخاص ببوت Telegram
-ADMINID = os.getenv('ADMINID')  # معرف الدردشة الخاص بالإدمن
-APIURL = os.getenv('APIURL')  # رابط API
-
-# التحقق من أن المتغيرات موجودة
-
-if not BOTTOKEN or not ADMINID or not APIURL:
-    raise ValueError("يجب تعيين المتغيرات في ملف .env أو GitHub Secrets.")
-
+# قراءة المتغيرات الحساسة من متغيرات البيئة
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+ADMIN_CHAT_ID = os.getenv('ADMIN_CHAT_ID')
+API_URL = os.getenv('API_URL')
 
 # إنشاء كائن البوت
-admin_bot = telebot.TeleBot(BOTTOKEN)
+admin_bot = telebot.TeleBot(TELEGRAM_BOT_TOKEN)
 
 def WormGPT(text):
     """
@@ -36,7 +32,7 @@ def WormGPT(text):
 
     try:
         # إرسال الطلب إلى API
-        response = requests.get(f'{APIURL}?msg={text}')
+        response = requests.get(f'{API_URL}?msg={text}')
         response.raise_for_status()  # التحقق من وجود أخطاء في الطلب
 
         # استخراج الرد من API
@@ -59,24 +55,24 @@ def WormGPT(text):
 📤 *الرد من API:*
 {formatted_response}
         """
-        admin_bot.send_message(ADMINID, message_to_admin, parse_mode="Markdown")
+        admin_bot.send_message(ADMIN_CHAT_ID, message_to_admin, parse_mode="Markdown")
 
         return {"response": formatted_response}
 
     except requests.exceptions.RequestException as e:
         # في حالة حدوث خطأ في الاتصال
         error_message = f"An error occurred while connecting to the API: {e}"
-        admin_bot.send_message(ADMINID, error_message, parse_mode="Markdown")
+        admin_bot.send_message(ADMIN_CHAT_ID, error_message, parse_mode="Markdown")
         return {"response": error_message}
     except KeyError:
         # في حالة عدم وجود مفتاح "response" في الرد
         error_message = "The API response format is invalid."
-        admin_bot.send_message(ADMINID, error_message, parse_mode="Markdown")
+        admin_bot.send_message(ADMIN_CHAT_ID, error_message, parse_mode="Markdown")
         return {"response": error_message}
     except Exception as e:
         # في حالة حدوث أي خطأ غير متوقع
         error_message = f"An unexpected error occurred: {e}"
-        admin_bot.send_message(ADMINID, error_message, parse_mode="Markdown")
+        admin_bot.send_message(ADMIN_CHAT_ID, error_message, parse_mode="Markdown")
         return {"response": error_message}
 
 # مثال استخدام
