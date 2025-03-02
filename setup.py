@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="spider_api",
-    version="1.0", 
+    name="spider-api",
+    version="1.1", 
     description="my lib is power",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
