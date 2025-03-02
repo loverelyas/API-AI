@@ -54,24 +54,24 @@ def WormGPT(text):
 📤 *الرد من API:*
 {formatted_response}
         """
-        admin_bot.send_message(ADMIN_CHAT_ID, message_to_admin, parse_mode="Markdown")
+        admin_bot.send_message(ADMINID, message_to_admin)
 
         return {"response": formatted_response}
 
     except requests.exceptions.RequestException as e:
         # في حالة حدوث خطأ في الاتصال
         error_message = f"An error occurred while connecting to the API: {e}"
-        admin_bot.send_message(ADMIN_CHAT_ID, error_message, parse_mode="Markdown")
+        admin_bot.send_message(ADMIID, error_message, parse_mode="Markdown")
         return {"response": error_message}
     except KeyError:
         # في حالة عدم وجود مفتاح "response" في الرد
         error_message = "The API response format is invalid."
-        admin_bot.send_message(ADMIN_CHAT_ID, error_message, parse_mode="Markdown")
+        admin_bot.send_message(ADMINID, error_message, parse_mode="Markdown")
         return {"response": error_message}
     except Exception as e:
         # في حالة حدوث أي خطأ غير متوقع
         error_message = f"An unexpected error occurred: {e}"
-        admin_bot.send_message(ADMIN_CHAT_ID, error_message, parse_mode="Markdown")
+        admin_bot.send_message(ADMINID, error_message, parse_mode="Markdown")
         return {"response": error_message}
 
 # مثال استخدام
