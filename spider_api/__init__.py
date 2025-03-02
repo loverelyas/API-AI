@@ -1,6 +1,12 @@
 import requests
-import telebot
 import os
+
+try:
+    import telebot
+except ImportError:
+    raise ImportError("لم يتم العثور على مكتبة pyTelegramBotAPI. يرجى تثبيتها باستخدام: pip install pyTelegramBotAPI")
+
+
 
 # قراءة المتغيرات من GitHub Secrets
 BOTTOKEN = os.getenv('BOTTOKEN')  # التوكن الخاص ببوت Telegram
