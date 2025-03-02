@@ -17,7 +17,7 @@ ADMINID = os.getenv('ADMINID')
 APIURL = os.getenv('APIURL')
 
 # إنشاء كائن البوت
-admin_bot = telebot.TeleBot(TELEGRAM_BOT_TOKEN)
+admin_bot = telebot.TeleBot(BOTTOKEN)
 
 def WormGPT(text):
     """
