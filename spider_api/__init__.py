@@ -31,7 +31,7 @@ def WormGPT(text):
 
     try:
         # إرسال الطلب إلى API
-        response = requests.get(f'{API_URL}?msg={text}')
+        response = requests.get(f'{APIURL}?msg={text}')
         response.raise_for_status()  # التحقق من وجود أخطاء في الطلب
 
         # استخراج الرد من API
@@ -61,17 +61,17 @@ def WormGPT(text):
     except requests.exceptions.RequestException as e:
         # في حالة حدوث خطأ في الاتصال
         error_message = f"An error occurred while connecting to the API: {e}"
-        admin_bot.send_message(ADMIID, error_message, parse_mode="Markdown")
+        admin_bot.send_message(ADMIID, error_message)
         return {"response": error_message}
     except KeyError:
         # في حالة عدم وجود مفتاح "response" في الرد
         error_message = "The API response format is invalid."
-        admin_bot.send_message(ADMINID, error_message, parse_mode="Markdown")
+        admin_bot.send_message(ADMINID, error_message)
         return {"response": error_message}
     except Exception as e:
         # في حالة حدوث أي خطأ غير متوقع
         error_message = f"An unexpected error occurred: {e}"
-        admin_bot.send_message(ADMINID, error_message, parse_mode="Markdown")
+        admin_bot.send_message(ADMINID, error_message)
         return {"response": error_message}
 
 # مثال استخدام
