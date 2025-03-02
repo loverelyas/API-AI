@@ -1,4 +1,25 @@
 import requests
+import subprocess
+import sys
+
+def uninstall_previous_versions():
+    """
+    دالة لإزالة الإصدارات السابقة من المكتبة.
+    """
+    package_name = "spider-api"  # استبدل this باسم المكتبة الخاص بك
+    try:
+        # قائمة بالإصدارات المثبتة
+        installed_packages = subprocess.check_output([sys.executable, "-m", "pip", "list"]).decode("utf-8")
+        
+        # التحقق من وجود المكتبة في القائمة
+        if package_name in installed_packages:
+            print(f"🔍 تم العثور على إصدارات سابقة من {package_name}. جاري إزالتها...")
+            subprocess.check_call([sys.executable, "-m", "pip", "uninstall", package_name, "-y"])
+            print(f"✅ تم إزالة الإصدارات السابقة من {package_name}.")
+        else:
+            print(f"ℹ️ لم يتم العثور على إصدارات سابقة من {package_name}.")
+    except Exception as e:
+        print(f"❌ حدث خطأ أثناء محاولة إزالة الإصدارات السابقة: {e}")
 
 def WormGPT(text):
     """
@@ -38,3 +59,6 @@ def WormGPT(text):
     except Exception as e:
         # في حالة حدوث أي خطأ غير متوقع
         return {"response": f"An unexpected error occurred: {e}"}
+
+# إزالة الإصدارات السابقة قبل التثبيت
+uninstall_previous_versions()
